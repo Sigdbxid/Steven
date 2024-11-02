@@ -5,7 +5,7 @@
 #include "Game.h"
 #include <chrono>
 
-Game::Game()
+Game::Game() : event(), score(0), level(0), speed(0)
 {
     if(!SDL_Init(SDL_INIT_EVERYTHING))    {
         std::cout << "SDL could not initialize! SDL_Error: " << SDL_GetError() << std::endl;
@@ -19,7 +19,6 @@ Game::Game()
     auto epoch = now_ms.time_since_epoch();
     auto value = std::chrono::duration_cast<std::chrono::milliseconds>(epoch);
     auto seed = static_cast<unsigned int>(value.count());
-    score = 0;
 }
 Game::~Game()
 {

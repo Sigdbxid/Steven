@@ -22,8 +22,8 @@ private:
     struct Direct_vector {//方向向量
         int x;
         int y;
-        Direct_vector operator=(Direct_vector &other)//重载赋值运算符,防止浅拷贝
-        {
+        Direct_vector& operator=(const Direct_vector &other)//重载赋值运算符,防止浅拷贝
+        {// 运算符重载型参是不可改变的
             if(this != &other)
             {
                 this->x = other.x;
@@ -33,8 +33,6 @@ private:
         }
     }UP = {0,1}, DOWN = {0,-1}, LEFT = {-1,0}, RIGHT = {1,0};
     Direct_vector direction;
-    int level;
-    int speed;
 };
 
 

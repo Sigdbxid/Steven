@@ -11,7 +11,7 @@ void Snake::snake_Move() {
         /*蛇头坐标与当前的方向向量相加，确定下一时刻蛇头的位置*/
         HeadSnake_x += direction.x;
         HeadSnake_y += direction.y;
-        snakeBody.insert(snakeBody.begin(),{HeadSnake_x,HeadSnake_y});//将蛇头位置插入到蛇身列表的开头
+        snakeBody.insert(snakeBody.begin(),{HeadSnake_x,HeadSnake_y});//将蛇尾插入到蛇身列表的开头
         snakeBody.pop_back();
     }
     else //如果用户改变了蛇的方向
@@ -19,18 +19,23 @@ void Snake::snake_Move() {
         switch (event.key.keysym.sym)
         {
             case SDLK_UP:
-                direction = UP;
+                if (direction.y != 1) direction = UP;
                 break;
             case SDLK_DOWN:
-                direction = DOWN;
+                if (direction.y != -1) direction = DOWN;
                 break;
             case SDLK_LEFT:
-                direction = LEFT;
+                if(direction.x != 1) direction = LEFT;
                 break;
             case SDLK_RIGHT:
-                direction = RIGHT;
+                if(direction.x != -1) direction = RIGHT;
                 break;
         }
+        /*确定转向后蛇头的位置，并将蛇尾放在蛇身最前面*/
+        HeadSnake_x += direction.x;
+        HeadSnake_y += direction.y;
+        snakeBody.insert(snakeBody.begin(),{HeadSnake_x,HeadSnake_y});
+        snakeBody.pop_back();
     }
 }
 void Snake::snake_Grow()

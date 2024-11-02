@@ -38,6 +38,8 @@ protected:
     SDL_Renderer* renderer = nullptr; //渲染器
     SDL_Event event; //事件
     SDL_Color Background_color = {0, 0, 0, 255};
+    int level;
+    int speed;
 };
 
 
