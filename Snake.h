@@ -13,7 +13,6 @@ public:
     Snake();
     void draw();
     void snake_Grow();
-    void snake_Die();
     void snake_Move();
 private:
     int HeadSnake_x, HeadSnake_y;
