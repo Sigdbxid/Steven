@@ -70,6 +70,13 @@ build CMakeFiles/SnakeGame.dir/Snake.cpp.o: CXX_COMPILER__SnakeGame_unscanned_De
   OBJECT_DIR = CMakeFiles/SnakeGame.dir
   OBJECT_FILE_DIR = CMakeFiles/SnakeGame.dir
 
+build CMakeFiles/SnakeGame.dir/Fruit.cpp.o: CXX_COMPILER__SnakeGame_unscanned_Debug /Users/sandraloja/CLionProjects/贪吃蛇/Fruit.cpp || cmake_object_order_depends_target_SnakeGame
+  DEP_FILE = CMakeFiles/SnakeGame.dir/Fruit.cpp.o.d
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics -F /Library/Frameworks/
+  INCLUDES = -isystem /Library/Frameworks/SDL2.framework/Headers -F/Library/Frameworks
+  OBJECT_DIR = CMakeFiles/SnakeGame.dir
+  OBJECT_FILE_DIR = CMakeFiles/SnakeGame.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target SnakeGame
@@ -78,7 +85,7 @@ build CMakeFiles/SnakeGame.dir/Snake.cpp.o: CXX_COMPILER__SnakeGame_unscanned_De
 #############################################
 # Link the executable SnakeGame
 
-build SnakeGame: CXX_EXECUTABLE_LINKER__SnakeGame_Debug CMakeFiles/SnakeGame.dir/main.cpp.o CMakeFiles/SnakeGame.dir/Game.cpp.o CMakeFiles/SnakeGame.dir/Snake.cpp.o
+build SnakeGame: CXX_EXECUTABLE_LINKER__SnakeGame_Debug CMakeFiles/SnakeGame.dir/main.cpp.o CMakeFiles/SnakeGame.dir/Game.cpp.o CMakeFiles/SnakeGame.dir/Snake.cpp.o CMakeFiles/SnakeGame.dir/Fruit.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk
   LINK_FLAGS = -F /Library/Frameworks/ -framework SDL2
   OBJECT_DIR = CMakeFiles/SnakeGame.dir

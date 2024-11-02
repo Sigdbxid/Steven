@@ -17,7 +17,8 @@ include_directories(${SDL2_INCLUDE_DIRS})
 
 # 添加可执行文件
 add_executable(SnakeGame main.cpp Game.h Game.cpp
-        Snake.cpp)
+        Snake.cpp
+        Fruit.cpp)
 
 # 链接SDL2库
 target_link_libraries(SnakeGame ${SDL2_LIBRARIES})

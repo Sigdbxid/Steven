@@ -14,6 +14,7 @@ public:
     };
     Fruit(int x, int y);
     void getFruit_Position();
+    void draw_fruit();
 private:
     Position fruit_position;
     SDL_Color fruit_color;
