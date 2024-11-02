@@ -37,6 +37,7 @@ protected:
     SDL_Window* window = nullptr; //窗口
     SDL_Renderer* renderer = nullptr; //渲染器
     SDL_Event event; //事件
+    SDL_Color Background_color = {0, 0, 0, 255};
 };
 
 

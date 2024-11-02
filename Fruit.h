@@ -4,10 +4,19 @@
 
 #ifndef SNAKEGAME_FRUIT_H
 #define SNAKEGAME_FRUIT_H
-
-
-class Fruit {
-
+#include <SDL.h>
+#include "Game.h"
+class Fruit : public Game {
+public:
+    struct Position{
+        int x;
+        int y;
+    };
+    Fruit(int x, int y);
+    void getFruit_Position();
+private:
+    Position fruit_position;
+    SDL_Color fruit_color;
 };
 
 
