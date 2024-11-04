@@ -54,3 +54,4 @@ void Snake::draw()
         SDL_RenderFillRect(renderer,&rect);
     }
 }
+

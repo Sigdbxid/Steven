@@ -22,3 +22,4 @@ add_executable(SnakeGame main.cpp Game.h Game.cpp
 
 # 链接SDL2库
 target_link_libraries(SnakeGame ${SDL2_LIBRARIES})
+

@@ -49,5 +49,4 @@ protected:
     Direct_vector direction;
 };
 
-
 #endif //SNAKEGAME_GAME_H

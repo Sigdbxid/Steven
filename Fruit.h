@@ -23,5 +23,4 @@ private:
     SDL_Color fruit_color;
 };
 
-
 #endif //SNAKEGAME_FRUIT_H

@@ -28,3 +28,4 @@ void Fruit::draw_fruit()
     SDL_SetRenderDrawColor(renderer, fruit_color.r, fruit_color.g, fruit_color.b, fruit_color.a);
     SDL_RenderFillRect(renderer, &fruit_rect);
 }
+
