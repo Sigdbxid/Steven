@@ -10,8 +10,7 @@
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 const int SQUARE_SIZE = 20;
-const int WIDTH_MAP = 30;
-const int HEIGHT_MAP = 30;
+
 struct Direct_vector {//方向向量
     int x;
     int y;
