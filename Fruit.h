@@ -15,7 +15,7 @@ public:
         int y;
     };
     Fruit(int x, int y);
-    void getFruit_Position() override;
+    void getFruit_Position();
     void draw_fruit();
     friend class Game;
 private:

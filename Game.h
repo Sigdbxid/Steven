@@ -29,14 +29,11 @@ class Game {
 public:
     Game();
     ~Game();
-    void start();
-    void end();
     void handleInput();
     void reset();
-    virtual void snake_Move() {}
-    virtual void getFruit_Position() {};
+    void resume();
 private:
-    bool IsgameOver();
+    bool IsGameOver();
     bool checkCollision();
     bool isrunning;
     [[nodiscard]] bool win() const;
