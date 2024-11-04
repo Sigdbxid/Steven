@@ -5,9 +5,15 @@
 #include "Fruit.h"
 void Fruit::getFruit_Position()
 {
-    fruit_position.x = rand()% WIDTH_MAP;
-    fruit_position.y = rand()% HEIGHT_MAP;
-
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> xDis(0, SCREEN_WIDTH/SQUARE_SIZE - 1);
+    std::uniform_int_distribution<> yDis(0, SCREEN_HEIGHT/SQUARE_SIZE - 1);
+    do {
+        fruit_position.x = xDis(gen);
+        fruit_position.y = yDis(gen);
+    } while (fruit_position.x == 0 && fruit_position.y == 0);
+    draw_fruit();
 }
 Fruit::Fruit(int x, int y)
 {

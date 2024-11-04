@@ -6,6 +6,8 @@
 #define SNAKEGAME_FRUIT_H
 #include <SDL.h>
 #include "Game.h"
+#include <random>
+
 class Fruit : public Game {
 public:
     struct Position{
@@ -13,8 +15,9 @@ public:
         int y;
     };
     Fruit(int x, int y);
-    void getFruit_Position();
+    void getFruit_Position() override;
     void draw_fruit();
+    friend class Game;
 private:
     Position fruit_position;
     SDL_Color fruit_color;

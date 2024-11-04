@@ -4,10 +4,6 @@
 
 int main() {
     Game Snake;
-    if (Snake.game() && Snake.loadMedia()) {
-            Snake.run();
-        }
-        Snake.close();
-    }
+
     return 0;
 }

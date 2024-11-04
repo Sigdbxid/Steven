@@ -3,22 +3,17 @@
 //
 #include <iostream>
 #include "Game.h"
-#include <chrono>
 
 Game::Game() : event(), score(0), level(0), speed(0)
 {
-    if(!SDL_Init(SDL_INIT_EVERYTHING))    {
+    if(!SDL_Init(SDL_INIT_EVERYTHING)) {
         std::cout << "SDL could not initialize! SDL_Error: " << SDL_GetError() << std::endl;
     }
     window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                               SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    /*生成随机数种子*/
-    auto now = std::chrono::system_clock::now();
-    auto now_ms = std::chrono::time_point_cast<std::chrono::milliseconds>(now);
-    auto epoch = now_ms.time_since_epoch();
-    auto value = std::chrono::duration_cast<std::chrono::milliseconds>(epoch);
-    auto seed = static_cast<unsigned int>(value.count());
+    isrunning = true;
+    direction = RIGHT;
 }
 Game::~Game()
 {
@@ -26,24 +21,62 @@ Game::~Game()
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
-void handleInput()
+void Game::handleInput()
 {
-
+    while(SDL_PollEvent(&event))
+    {
+        if(event.type == SDL_QUIT)
+        {
+            isrunning = false;
+        }
+        else if(!IsgameOver())
+        {
+            reset();
+            snake_Move();
+        }
+    }
 }
-void reset()
+void Game::reset()
 {
-
+    if(snake.HeadSnake_x == fruit.fruit_position.x
+    && snake.HeadSnake_y == fruit.fruit_position.y)
+    {
+        getFruit_Position();
+        snake.snake_Grow();
+        score++;
+    }
+    else if(fruit.fruit_position.x == -1 && fruit.fruit_position.y == -1)
+    {
+        getFruit_Position();
+    }
 }
-void resume()
+bool Game::IsgameOver()
 {
-
+    if(snake.HeadSnake_x < 0 || snake.HeadSnake_y < 0 || snake.HeadSnake_x > SCREEN_WIDTH || snake.HeadSnake_y > SCREEN_HEIGHT
+    || (!checkCollision()) || win())
+    {
+        return true;
+    }
+    return false;
 }
-
-void gameOver()
+bool Game::checkCollision()
 {
-
+    for(const auto &segment : snake.snakeBody)
+    {
+        if(segment.second == snake.HeadSnake_x
+        && segment.second == snake.HeadSnake_y)
+            return true;
+    }
+    return false;
 }
-void win()
+[[nodiscard]] bool Game::win() const
 {
-
+    if(snake.tailLength == (SCREEN_WIDTH / SQUARE_SIZE) * (SCREEN_HEIGHT / SQUARE_SIZE))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

@@ -5,7 +5,6 @@
 #ifndef SNAKEGAME_SNAKE_H
 #define SNAKEGAME_SNAKE_H
 #include "Game.h"
-#include <stdbool.h>
 #include <vector>
 
 class Snake : public Game{
@@ -13,26 +12,13 @@ public:
     Snake();
     void draw();
     void snake_Grow();
-    void snake_Move();
+    void snake_Move() override;
 private:
     int HeadSnake_x, HeadSnake_y;
     int score;
+    friend class Game;
     std::vector<std::pair<int, int>> snakeBody; // 蛇身坐标（不包括蛇头）
     int tailLength;
-    struct Direct_vector {//方向向量
-        int x;
-        int y;
-        Direct_vector& operator=(const Direct_vector &other)//重载赋值运算符,防止浅拷贝
-        {// 运算符重载型参是不可改变的
-            if(this != &other)
-            {
-                this->x = other.x;
-                this->y = other.y;
-            }
-            return *this;
-        }
-    }UP = {0,1}, DOWN = {0,-1}, LEFT = {-1,0}, RIGHT = {1,0};
-    Direct_vector direction;
 };
 
 

@@ -43,6 +43,7 @@ void Snake::snake_Grow()
     HeadSnake_x += direction.x;
     HeadSnake_y += direction.y;
     snakeBody.insert(snakeBody.begin(),{HeadSnake_x,HeadSnake_y});
+    tailLength++;
 }
 void Snake::draw()
 {
