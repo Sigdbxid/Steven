@@ -12,7 +12,7 @@ Game::Game() : score(0), level(0), speed(0), direction(RIGHT)
     window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                               SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    isrunning = true;
+    isRunning = true;
 }
 Game::~Game()
 {
@@ -24,18 +24,24 @@ void Game::resume()
 {
     while(SDL_PollEvent(&event))
     {
-        if(!isrunning)
+        frame_start = SDL_GetTicks();
+        if(!isRunning)
         {
             break;
         }
         handleInput();
+        frame_time = SDL_GetTicks();
+        if(FRAME_TIME > frame_time - frame_start)
+        {
+        SDL_Delay(FRAME_TIME - (frame_time - frame_start));
+        }
     }
 }
 void Game::handleInput()
 {
     if(event.type == SDL_QUIT)
     {
-        isrunning = false;
+        isRunning = false;
     }
     else if(!IsGameOver())
     {

@@ -12,7 +12,7 @@ void Fruit::getFruit_Position()
     do {
         fruit_position.x = xDis(gen);
         fruit_position.y = yDis(gen);
-    } while (fruit_position.x == 0 && fruit_position.y == 0);
+    } while (checkPosition());
     draw_fruit();
 }
 Fruit::Fruit(int x, int y)
@@ -28,4 +28,14 @@ void Fruit::draw_fruit()
     SDL_SetRenderDrawColor(renderer, fruit_color.r, fruit_color.g, fruit_color.b, fruit_color.a);
     SDL_RenderFillRect(renderer, &fruit_rect);
 }
-
+bool Fruit::checkPosition()
+{
+    for(const auto& segment : snake.snakeBody)
+    {
+        if(segment.first == fruit_position.x && segment.second == fruit_position.y)
+        {
+            return true;
+        }
+    }
+    return false;
+}

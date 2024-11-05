@@ -10,6 +10,8 @@
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 const int SQUARE_SIZE = 20;
+const int FPS = 60;
+const int FRAME_TIME = 1000 / FPS;
 
 struct Direct_vector {//方向向量
     int x;
@@ -34,7 +36,7 @@ public:
 private:
     bool IsGameOver();
     bool checkCollision();
-    bool isrunning;
+    bool isRunning;
     [[nodiscard]] bool win() const;
 protected:
     int score; //得分
@@ -47,6 +49,8 @@ protected:
     int level;
     int speed;
     Direct_vector direction;
+    Uint32 frame_start, frame_time;
+    friend bool Fruit::checkPosition();
 };
 
 #endif //SNAKEGAME_GAME_H

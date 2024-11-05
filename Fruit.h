@@ -18,6 +18,7 @@ public:
     void getFruit_Position();
     void draw_fruit();
     friend class Game;
+    bool checkPosition();
 private:
     Position fruit_position;
     SDL_Color fruit_color;
