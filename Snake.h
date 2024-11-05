@@ -21,4 +21,5 @@ private:
     int tailLength;
 };
 
+
 #endif //SNAKEGAME_SNAKE_H

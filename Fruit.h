@@ -25,3 +25,4 @@ private:
 };
 
 #endif //SNAKEGAME_FRUIT_H
+

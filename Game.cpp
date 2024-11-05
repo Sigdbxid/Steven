@@ -87,3 +87,4 @@ bool Game::checkCollision()
     return snake.tailLength == (SCREEN_WIDTH / SQUARE_SIZE) * (SCREEN_HEIGHT / SQUARE_SIZE);
 }
 
+

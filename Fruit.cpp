@@ -39,3 +39,4 @@ bool Fruit::checkPosition()
     }
     return false;
 }
+
