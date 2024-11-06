@@ -1,0 +1,6 @@
+# ninja log v6
+4	276	1730852424895763373	CMakeFiles/SnakeGame.dir/main.cpp.o	dde12167925b0856
+4	857	1730852424894959057	CMakeFiles/SnakeGame.dir/Game.cpp.o	b7c6a5850fa7a562
+4	697	1730852424895088930	CMakeFiles/SnakeGame.dir/Snake.cpp.o	eb5eed20bd780787
+3	853	1730852424894660397	CMakeFiles/SnakeGame.dir/Fruit.cpp.o	44402a28179b9ff4
+9	59	1730852512582205451	SnakeGame	d6a31221e010a4cf
