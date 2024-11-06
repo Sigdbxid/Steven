@@ -45,14 +45,4 @@ void Snake::snake_Grow()
     snakeBody.insert(snakeBody.begin(),{HeadSnake_x,HeadSnake_y});
     tailLength++;
 }
-void Snake::draw()
-{
-    for(auto &bodyPart : snakeBody)
-    {
-        SDL_Rect rect = {bodyPart.first * SQUARE_SIZE,bodyPart.second * SQUARE_SIZE,
-                         SQUARE_SIZE,SQUARE_SIZE};
-        SDL_RenderFillRect(renderer,&rect);
-    }
-}
-
 

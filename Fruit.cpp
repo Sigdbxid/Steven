@@ -3,7 +3,7 @@
 //
 
 #include "Fruit.h"
-void Fruit::getFruit_Position()
+void Fruit::getFruit_Position(std::vector<std::pair<int, int>> & snakeBody, SDL_Renderer* Renderer)
 {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -12,8 +12,8 @@ void Fruit::getFruit_Position()
     do {
         fruit_position.x = xDis(gen);
         fruit_position.y = yDis(gen);
-    } while (checkPosition());
-    draw_fruit();
+    } while (checkPosition(snakeBody));
+    draw_fruit(Renderer);
 }
 Fruit::Fruit(int x, int y)
 {
@@ -21,16 +21,16 @@ Fruit::Fruit(int x, int y)
     fruit_position.y = y;
     fruit_color = {100,0,0,255};
 }
-void Fruit::draw_fruit()
+void Fruit::draw_fruit(SDL_Renderer* renderer) const
 {
     SDL_Rect fruit_rect = {fruit_position.x * SQUARE_SIZE, fruit_position.y * SQUARE_SIZE,
                            SQUARE_SIZE, SQUARE_SIZE};
     SDL_SetRenderDrawColor(renderer, fruit_color.r, fruit_color.g, fruit_color.b, fruit_color.a);
     SDL_RenderFillRect(renderer, &fruit_rect);
 }
-bool Fruit::checkPosition()
+bool Fruit::checkPosition(std::vector<std::pair<int, int>>& snakeBody)
 {
-    for(const auto& segment : snake.snakeBody)
+    for(const auto& segment : snakeBody)
     {
         if(segment.first == fruit_position.x && segment.second == fruit_position.y)
         {

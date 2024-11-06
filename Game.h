@@ -1,12 +1,13 @@
 //
-// Created by Steven_NIUBI on 2024/11/1.
+// Created by Steven_NIUBI on 2024/11/1->
 //
 
 #ifndef SNAKEGAME_GAME_H
 #define SNAKEGAME_GAME_H
+
 #include <SDL.h>
-#include "Snake.h"
-#include "Fruit.h"
+class Fruit;
+class Snake;
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 const int SQUARE_SIZE = 20;
@@ -25,7 +26,11 @@ struct Direct_vector {//方向向量
         }
         return *this;
     }
-}UP = {0,1}, DOWN = {0,-1}, LEFT = {-1,0}, RIGHT = {1,0};
+};
+const Direct_vector UP = {0, -1};
+const Direct_vector DOWN = {0, 1};
+const Direct_vector LEFT = {-1, 0};
+const Direct_vector RIGHT = {1, 0};
 class Game {
 public:
     Game();
@@ -33,6 +38,10 @@ public:
     void handleInput();
     void reset();
     void resume();
+    friend class Fruit;
+    Snake* snake;
+    Fruit* fruit;
+    friend class Fruit;
 private:
     bool IsGameOver();
     bool checkCollision();
@@ -43,14 +52,8 @@ protected:
     SDL_Window* window = nullptr; //窗口
     SDL_Renderer* renderer = nullptr; //渲染器
     SDL_Event event; //事件
-    Snake snake;
-    Fruit fruit{-1,-1};
-    SDL_Color Background_color = {0, 0, 0, 255};
-    int level;
-    int speed;
     Direct_vector direction;
     Uint32 frame_start, frame_time;
-    friend bool Fruit::checkPosition();
 };
 
 #endif //SNAKEGAME_GAME_H
