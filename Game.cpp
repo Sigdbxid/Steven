@@ -48,7 +48,7 @@ void Game::resume()
 }
 void Game::handleInput()
 {
-    if(event.type == SDL_QUIT)
+    if(event.type == SDL_QUIT || IsGameOver())
     {
         isRunning = false;
     }
