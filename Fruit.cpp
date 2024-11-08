@@ -13,7 +13,6 @@ void Fruit::getFruit_Position(std::vector<std::pair<int, int>> & snakeBody, SDL_
         fruit_position.x = xDis(gen);
         fruit_position.y = yDis(gen);
     } while (checkPosition(snakeBody));
-    draw_fruit(Renderer);
 }
 Fruit::Fruit(int x, int y)
 {

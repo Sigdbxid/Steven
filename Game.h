@@ -35,6 +35,7 @@ class Game {
 public:
     Game();
     ~Game();
+    void initialise();
     void handleInput();
     void reset();
     void resume();
@@ -44,7 +45,7 @@ public:
     friend class Fruit;
 private:
     bool IsGameOver();
-    bool checkCollision();
+    [[nodiscard]]bool checkCollision() const;
     bool isRunning;
     [[nodiscard]] bool win() const;
 protected:

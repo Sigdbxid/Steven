@@ -7,10 +7,11 @@
 #include <vector>
 #include "Game.h"
 
-class Snake : public Game{
+class Snake{
 public:
-    void snake_Grow();
-    void snake_Move();
+    void snake_Grow(Direct_vector direction);
+    void snake_Move(SDL_Event* event, Direct_vector direction);
+    void draw(SDL_Renderer* renderer);
     std::vector<std::pair<int, int>> snakeBody; // 蛇身坐标（不包括蛇头）
     friend class Game;
 private:
