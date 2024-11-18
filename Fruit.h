@@ -14,7 +14,7 @@ public:
         int x;
         int y;
     };
-    Fruit(int x, int y);
+    Fruit(int x, int y) : fruit_position{x, y} {fruit_color = {100,0,0,255};} //设置初始颜色和位置
     void getFruit_Position(std::vector<std::pair<int, int>> & snakeBody, SDL_Renderer* Renderer);
     void draw_fruit(SDL_Renderer *renderer) const;
     friend class Game;

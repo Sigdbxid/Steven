@@ -16,7 +16,6 @@ public:
     friend class Game;
 private:
     int HeadSnake_x, HeadSnake_y;
-    int score;
     int tailLength;
 };
 

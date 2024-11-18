@@ -35,19 +35,18 @@ class Game {
 public:
     Game();
     ~Game();
-    void initialise();
-    void handleInput();
-    void reset();
-    void resume();
+    void handleInput(); //处理用户输入
+    void reset(); //刷新游戏
+    void resume(); //主体
     friend class Fruit;
     Snake* snake;
     Fruit* fruit;
     friend class Fruit;
 private:
-    bool IsGameOver();
-    [[nodiscard]]bool checkCollision() const;
+    bool IsGameOver(); //游戏结束检查
+    [[nodiscard]]bool checkCollision() const; //果子检查碰撞
     bool isRunning;
-    [[nodiscard]] bool win() const;
+    [[nodiscard]] bool win() const; //胜利检查
 protected:
     int score; //得分
     SDL_Window* window = nullptr; //窗口

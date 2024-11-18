@@ -14,12 +14,6 @@ void Fruit::getFruit_Position(std::vector<std::pair<int, int>> & snakeBody, SDL_
         fruit_position.y = yDis(gen);
     } while (checkPosition(snakeBody));
 }
-Fruit::Fruit(int x, int y)
-{
-    fruit_position.x = x;
-    fruit_position.y = y;
-    fruit_color = {100,0,0,255};
-}
 void Fruit::draw_fruit(SDL_Renderer* renderer) const
 {
     SDL_Rect fruit_rect = {fruit_position.x * SQUARE_SIZE, fruit_position.y * SQUARE_SIZE,
