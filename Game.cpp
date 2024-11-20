@@ -17,6 +17,7 @@ Game::Game() : score(0), direction(RIGHT), snake(new Snake()), fruit(new Fruit(-
     isRunning = true;
     snake->HeadSnake_x = (SCREEN_WIDTH/(2 * SQUARE_SIZE));
     snake->HeadSnake_y = (SCREEN_HEIGHT/(2 * SQUARE_SIZE));
+    snake->snakeBody.resize(50);
     snake->snakeBody[0].first = snake->HeadSnake_x;
     snake->snakeBody[0].second = snake->HeadSnake_y;
     snake->tailLength = 1;
@@ -32,35 +33,32 @@ Game::~Game()
 }
 void Game::resume()
 {
-
-    while(SDL_PollEvent(&event))
+    while(isRunning)
     {
         frame_start = SDL_GetTicks();
-        if(!isRunning)
-        {
-            break;
-        }
-        handleInput();
-        SDL_RenderClear(renderer);
-        SDL_RenderPresent(renderer);
-        frame_time = SDL_GetTicks();
-        if(FRAME_TIME > frame_time - frame_start)
-        {
-            SDL_Delay(FRAME_TIME - (frame_time - frame_start));
+        while (SDL_PollEvent(&event)) {
+            SDL_RenderClear(renderer);
+            handleInput();
+            snake->draw(renderer);
+            fruit->draw_fruit(renderer);
+            SDL_RenderPresent(renderer);
+            frame_time = SDL_GetTicks();
+            if (FRAME_TIME > frame_time - frame_start) {
+                SDL_Delay(FRAME_TIME - (frame_time - frame_start));
+            }
         }
     }
 }
 void Game::handleInput()
 {
-    if(event.type == SDL_QUIT || !IsGameOver())
+    if(event.type == SDL_QUIT || IsGameOver())
     {
         isRunning = false;
     }
-    else if(IsGameOver())
+    else
     {
         reset();
         snake->snake_Move(&event,direction);
-        snake->draw(renderer);
     }
 }
 void Game::reset()
@@ -69,7 +67,6 @@ void Game::reset()
     && snake->HeadSnake_y == fruit->fruit_position.y)
     {
         fruit->getFruit_Position(snake->snakeBody, renderer);
-        fruit->draw_fruit(renderer);
         snake->snake_Grow(direction);
         score++;
     }

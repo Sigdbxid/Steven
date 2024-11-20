@@ -40,9 +40,8 @@ void Snake::snake_Move(SDL_Event* event, Direct_vector direction) {
 }
 void Snake::snake_Grow(Direct_vector direction)
 {
-    HeadSnake_x += direction.x;
-    HeadSnake_y += direction.y;
-    snakeBody.insert(snakeBody.begin(),{HeadSnake_x,HeadSnake_y});
+    auto tail = snakeBody.back();
+    snakeBody.emplace_back(tail.first + direction.x, tail.second + direction.y);
     tailLength++;
 }
 void Snake::draw(SDL_Renderer *renderer) {
