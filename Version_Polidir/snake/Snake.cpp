@@ -1,0 +1,54 @@
+//
+// Created by Sandra Loja on 2024/11/1.
+//
+
+#include "Snake.h"
+
+void Snake::snake_Move(SDL_Event* event, Direct_vector direction) {
+//判断用户是否改变了蛇的方向
+    if(!(event->type == SDL_KEYDOWN))
+    {
+        /*蛇头坐标与当前的方向向量相加，确定下一时刻蛇头的位置*/
+        HeadSnake_x += direction.x;
+        HeadSnake_y += direction.y;
+        snakeBody.insert(snakeBody.begin(),{HeadSnake_x,HeadSnake_y});//将蛇尾插入到蛇身列表的开头
+        snakeBody.pop_back();
+    }
+    else //如果用户改变了蛇的方向
+    {//判断蛇改变之后的方向
+        switch (event->key.keysym.sym)
+        {
+            case SDLK_UP:
+                if (direction.y != 1) direction = UP;
+                break;
+            case SDLK_DOWN:
+                if (direction.y != -1) direction = DOWN;
+                break;
+            case SDLK_LEFT:
+                if(direction.x != 1) direction = LEFT;
+                break;
+            case SDLK_RIGHT:
+                if(direction.x != -1) direction = RIGHT;
+                break;
+        }
+        /*确定转向后蛇头的位置，并将蛇尾放在蛇身最前面*/
+        HeadSnake_x += direction.x;
+        HeadSnake_y += direction.y;
+        snakeBody.insert(snakeBody.begin(),{HeadSnake_x,HeadSnake_y});
+        snakeBody.pop_back();
+    }
+}
+void Snake::snake_Grow(Direct_vector direction)
+{
+    HeadSnake_x += direction.x;
+    HeadSnake_y += direction.y;
+    snakeBody.insert(snakeBody.begin(),{HeadSnake_x,HeadSnake_y});
+    tailLength++;
+}
+void Snake::draw(SDL_Renderer *renderer) {
+    for (auto &segment : snakeBody) {
+        SDL_Rect rect = {segment.first * 20, segment.second * 20, 20, 20};
+        SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+        SDL_RenderFillRect(renderer, &rect);
+    }
+}
