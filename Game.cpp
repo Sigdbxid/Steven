@@ -40,6 +40,7 @@ void Game::resume()
     {
         frame_start = SDL_GetTicks();
         while (SDL_PollEvent(&event)) {
+            isRunning = IsGameOver();
             handleInput();
         }
         Uint32 currentTime = SDL_GetTicks();
@@ -61,7 +62,7 @@ void Game::resume()
 }
 void Game::handleInput()
 {
-    if(event.type == SDL_QUIT || (IsGameOver()))
+    if(event.type == SDL_QUIT)
     {
         isRunning = false;
     }
@@ -86,9 +87,9 @@ bool Game::IsGameOver()
     if(snake->HeadSnake_x < 0 || snake->HeadSnake_y < 0 || snake->HeadSnake_x > SCREEN_WIDTH/SQUARE_SIZE ||
     snake->HeadSnake_y > SCREEN_HEIGHT/SQUARE_SIZE || checkCollision() || win())
     {
-        return true;
+        return false;
     }
-    return false;
+    return true;
 }
 bool Game::checkCollision() const
 {
