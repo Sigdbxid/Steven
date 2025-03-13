@@ -46,6 +46,7 @@ private:
     bool IsGameOver(); //游戏结束检查
     [[nodiscard]]bool checkCollision() const; //果子检查碰撞
     bool isRunning;
+    SDL_Color BackGround_color = {0, 0, 0, 255}; //背景颜色
     [[nodiscard]] bool win() const; //胜利检查
 protected:
     int score; //得分

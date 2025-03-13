@@ -5,13 +5,16 @@
 #ifndef SNAKEGAME_SNAKE_H
 #define SNAKEGAME_SNAKE_H
 #include <vector>
+#include <iostream>
 #include "Game.h"
-
+#define TEST
 class Snake{
 public:
     void snake_Grow(Direct_vector direction);
-    void snake_Move(SDL_Event* event, Direct_vector direction);
+    void snake_direction(SDL_Event* event, Direct_vector& direction);
+    void snake_move(Direct_vector direction);
     void draw(SDL_Renderer* renderer);
+    SDL_Color snake_color;
     std::vector<std::pair<int, int>> snakeBody; // 蛇身坐标（不包括蛇头）
     friend class Game;
 private:

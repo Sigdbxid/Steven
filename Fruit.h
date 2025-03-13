@@ -14,14 +14,14 @@ public:
         int x;
         int y;
     };
-    Fruit(int x, int y) : fruit_position{x, y} {fruit_color = {100,0,0,255};} //设置初始颜色和位置
-    void getFruit_Position(std::vector<std::pair<int, int>> & snakeBody, SDL_Renderer* Renderer);
+    Fruit(int x, int y) : fruit_position{x, y} {fruit_color = {0,0,255,255};} //设置初始颜色和位置
+    void getFruit_Position(int HeadSnake_x, int HeadSnake_y, SDL_Renderer* Renderer);
     void draw_fruit(SDL_Renderer *renderer) const;
     friend class Game;
-    bool checkPosition(std::vector<std::pair<int, int>>& snakeBody);
+    [[nodiscard]] bool checkPosition(int HeadSnake_x, int HeadSnake_y) const;
 private:
     Position fruit_position;
-    SDL_Color fruit_color;
+    SDL_Color fruit_color{};
 };
 
 #endif //SNAKEGAME_FRUIT_H

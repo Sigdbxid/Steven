@@ -5,7 +5,7 @@
 #include "Game.h"
 #include "Snake.h"
 #include "Fruit.h"
-
+#define TEST
 Game::Game() : score(0), direction(RIGHT), snake(new Snake()), fruit(new Fruit(-1,-1))
 {
     if(SDL_Init(SDL_INIT_EVERYTHING)) {
@@ -17,11 +17,12 @@ Game::Game() : score(0), direction(RIGHT), snake(new Snake()), fruit(new Fruit(-
     isRunning = true;
     snake->HeadSnake_x = (SCREEN_WIDTH/(2 * SQUARE_SIZE));
     snake->HeadSnake_y = (SCREEN_HEIGHT/(2 * SQUARE_SIZE));
-    snake->snakeBody.resize(50);
+    snake->snakeBody.resize(1);
     snake->snakeBody[0].first = snake->HeadSnake_x;
     snake->snakeBody[0].second = snake->HeadSnake_y;
     snake->tailLength = 1;
-    fruit->getFruit_Position(snake->snakeBody, renderer);
+    snake->snake_color = {0, 255, 0, 255};
+    fruit->getFruit_Position(snake->HeadSnake_x,snake->HeadSnake_y, renderer);
 }
 Game::~Game()
 {
@@ -33,32 +34,41 @@ Game::~Game()
 }
 void Game::resume()
 {
+    Uint32 lastMoveTime = SDL_GetTicks(); // 记录上次移动时间
+    const Uint32 MOVE_INTERVAL = 200; // 蛇移动间隔，单位：毫秒
     while(isRunning)
     {
         frame_start = SDL_GetTicks();
         while (SDL_PollEvent(&event)) {
-            SDL_RenderClear(renderer);
             handleInput();
-            snake->draw(renderer);
-            fruit->draw_fruit(renderer);
-            SDL_RenderPresent(renderer);
-            frame_time = SDL_GetTicks();
-            if (FRAME_TIME > frame_time - frame_start) {
-                SDL_Delay(FRAME_TIME - (frame_time - frame_start));
-            }
+        }
+        Uint32 currentTime = SDL_GetTicks();
+        if (currentTime - lastMoveTime >= MOVE_INTERVAL) {
+            snake->snake_move(direction); // 自动移动蛇
+            reset(); // 检查蛇是否吃到果子
+            lastMoveTime = currentTime; // 更新最后移动时间
+        }
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 250);
+        SDL_RenderClear(renderer);
+        snake->draw(renderer);
+        fruit->draw_fruit(renderer);
+        SDL_RenderPresent(renderer);
+        frame_time = SDL_GetTicks();
+        if (FRAME_TIME > frame_time - frame_start) {
+            SDL_Delay(FRAME_TIME - (frame_time - frame_start));
         }
     }
 }
 void Game::handleInput()
 {
-    if(event.type == SDL_QUIT || IsGameOver())
+    if(event.type == SDL_QUIT || (IsGameOver()))
     {
         isRunning = false;
     }
     else
     {
         reset();
-        snake->snake_Move(&event,direction);
+        snake->snake_direction(&event,direction);
     }
 }
 void Game::reset()
@@ -66,15 +76,15 @@ void Game::reset()
     if(snake->HeadSnake_x == fruit->fruit_position.x
     && snake->HeadSnake_y == fruit->fruit_position.y)
     {
-        fruit->getFruit_Position(snake->snakeBody, renderer);
+        fruit->getFruit_Position(snake->HeadSnake_x,snake->HeadSnake_y, renderer);
         snake->snake_Grow(direction);
         score++;
     }
 }
 bool Game::IsGameOver()
 {
-    if(snake->HeadSnake_x <= 0 || snake->HeadSnake_y <= 0 || snake->HeadSnake_x >= SCREEN_WIDTH/SQUARE_SIZE ||
-    snake->HeadSnake_y >= SCREEN_HEIGHT/SQUARE_SIZE || (!checkCollision()) || win())
+    if(snake->HeadSnake_x < 0 || snake->HeadSnake_y < 0 || snake->HeadSnake_x > SCREEN_WIDTH/SQUARE_SIZE ||
+    snake->HeadSnake_y > SCREEN_HEIGHT/SQUARE_SIZE || checkCollision() || win())
     {
         return true;
     }
@@ -82,10 +92,10 @@ bool Game::IsGameOver()
 }
 bool Game::checkCollision() const
 {
-    for(const auto &segment : snake->snakeBody)
+    for(size_t i = 1; i < snake->snakeBody.size(); i++)
     {
-        if(segment.first == snake->HeadSnake_x
-        && segment.second == snake->HeadSnake_y)
+        if(snake->snakeBody[i].first == snake->HeadSnake_x
+        && snake->snakeBody[i].second == snake->HeadSnake_y)
             return true;
     }
     return false;
