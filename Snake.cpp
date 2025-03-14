@@ -42,7 +42,10 @@ void Snake::snake_move(Direct_vector direction)
 void Snake::snake_Grow(Direct_vector direction)
 {
     auto tail = snakeBody.back();
-    snakeBody.emplace_back(tail.first + direction.x, tail.second + direction.y);
+    auto before_tail = snakeBody[snakeBody.size() - 2];
+    int newtail_X = tail.first - (before_tail.first - tail.first);
+    int newtail_Y = tail.second - (before_tail.second - tail.second);
+    snakeBody.emplace_back(newtail_X,newtail_Y);
     tailLength++;
 }
 void Snake::draw(SDL_Renderer *renderer) {
