@@ -18,7 +18,7 @@ public:
     void getFruit_Position(int HeadSnake_x, int HeadSnake_y, SDL_Renderer* Renderer);
     void draw_fruit(SDL_Renderer *renderer) const;
     friend class Game;
-    [[nodiscard]] bool checkPosition(int HeadSnake_x, int HeadSnake_y) const;
+    bool checkPosition(int HeadSnake_x, int HeadSnake_y) const;
 private:
     Position fruit_position;
     SDL_Color fruit_color{};

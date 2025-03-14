@@ -33,11 +33,11 @@ void Snake::snake_move(Direct_vector direction)
     HeadSnake_y += direction.y;
     snakeBody.insert(snakeBody.begin(), {HeadSnake_x, HeadSnake_y});
     snakeBody.pop_back();
-#ifdef TEST
+/*#ifdef TEST
     std::cout << "snakeBody size: " << snakeBody.size() << std::endl;
     std::cout << "first snakeBody: " << snakeBody[0].first << ";" << snakeBody[0].second << std::endl;
     std::cout << "HeadSnake_x: " << HeadSnake_x << "; HeadSnake_y: " << HeadSnake_y << std::endl;
-#endif
+#endif*/
 }
 void Snake::snake_Grow(Direct_vector direction)
 {

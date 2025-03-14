@@ -35,7 +35,6 @@ class Game {
 public:
     Game();
     ~Game();
-    void handleInput(); //处理用户输入
     void reset(); //刷新游戏
     void resume(); //主体
     friend class Fruit;
@@ -47,7 +46,7 @@ private:
     [[nodiscard]]bool checkCollision() const; //果子检查碰撞
     bool isRunning;
     SDL_Color BackGround_color = {0, 0, 0, 255}; //背景颜色
-    [[nodiscard]] bool win() const; //胜利检查
+    bool win() const; //胜利检查
 protected:
     int score; //得分
     SDL_Window* window = nullptr; //窗口

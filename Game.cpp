@@ -40,9 +40,9 @@ void Game::resume()
     {
         frame_start = SDL_GetTicks();
         while (SDL_PollEvent(&event)) {
-            isRunning = IsGameOver();
-            handleInput();
+            snake->snake_direction(&event,direction);
         }
+        isRunning = IsGameOver();
         Uint32 currentTime = SDL_GetTicks();
         if (currentTime - lastMoveTime >= MOVE_INTERVAL) {
             snake->snake_move(direction); // 自动移动蛇
@@ -60,18 +60,6 @@ void Game::resume()
         }
     }
 }
-void Game::handleInput()
-{
-    if(event.type == SDL_QUIT)
-    {
-        isRunning = false;
-    }
-    else
-    {
-        reset();
-        snake->snake_direction(&event,direction);
-    }
-}
 void Game::reset()
 {
     if(snake->HeadSnake_x == fruit->fruit_position.x
@@ -87,6 +75,9 @@ bool Game::IsGameOver()
     if(snake->HeadSnake_x < 0 || snake->HeadSnake_y < 0 || snake->HeadSnake_x > SCREEN_WIDTH/SQUARE_SIZE ||
     snake->HeadSnake_y > SCREEN_HEIGHT/SQUARE_SIZE || checkCollision() || win())
     {
+#ifdef TEST
+        std::cout << "Game Over" << std::endl;
+#endif
         return false;
     }
     return true;
@@ -97,11 +88,23 @@ bool Game::checkCollision() const
     {
         if(snake->snakeBody[i].first == snake->HeadSnake_x
         && snake->snakeBody[i].second == snake->HeadSnake_y)
+        {
+#ifdef TEST
+            std::cout << "Game Over2" << std::endl;
+            std::cout << (snake->snakeBody[i].first) << "," << (snake->snakeBody[i].second) << std::endl;
+            std::cout << (snake->HeadSnake_x) << "," << (snake->HeadSnake_y) << std::endl;
+            std::cout << i <<std::endl;
+#endif
             return true;
+        }
     }
     return false;
 }
-[[nodiscard]] bool Game::win() const
+bool Game::win() const
 {
+#ifdef TEST
+    if(snake->tailLength == (SCREEN_WIDTH / SQUARE_SIZE) * (SCREEN_HEIGHT / SQUARE_SIZE))
+        std::cout << "Game Over1" << std::endl;
+#endif
     return snake->tailLength == (SCREEN_WIDTH / SQUARE_SIZE) * (SCREEN_HEIGHT / SQUARE_SIZE);
 }
