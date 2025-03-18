@@ -2,10 +2,11 @@
 // Created by Steven NIUBI on 2024/11/1.
 //
 #include <iostream>
+#include <SDL_ttf.h>
 #include "Game.h"
 #include "Snake.h"
 #include "Fruit.h"
-#define TEST
+//#define TEST
 Game::Game() : score(0), direction(RIGHT), snake(new Snake()), fruit(new Fruit(-1,-1))
 {
     if(SDL_Init(SDL_INIT_EVERYTHING)) {
@@ -23,6 +24,7 @@ Game::Game() : score(0), direction(RIGHT), snake(new Snake()), fruit(new Fruit(-
     snake->tailLength = 1;
     snake->snake_color = {0, 255, 0, 255};
     fruit->getFruit_Position(snake->HeadSnake_x,snake->HeadSnake_y, renderer);
+    TTF_Init();
 }
 Game::~Game()
 {
@@ -108,3 +110,11 @@ bool Game::win() const
 #endif
     return snake->tailLength == (SCREEN_WIDTH / SQUARE_SIZE) * (SCREEN_HEIGHT / SQUARE_SIZE);
 }
+/*void Game::Write(std::string str, SDL_Rect *rect)
+{
+    SDL_Surface* surface = TTF_RenderText_Solid(font, str.c_str(), {0, 0, 0, 0});
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_RenderCopy(renderer, texture, NULL, rect);
+    SDL_DestroyTexture(texture);
+    SDL_FreeSurface(surface);
+}*/

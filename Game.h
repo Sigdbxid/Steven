@@ -6,6 +6,7 @@
 #define SNAKEGAME_GAME_H
 
 #include <SDL.h>
+#include <string>
 class Fruit;
 class Snake;
 const int SCREEN_WIDTH = 800;
@@ -38,6 +39,8 @@ public:
     void reset(); //刷新游戏
     void resume(); //主体
     friend class Fruit;
+    //TTF_Font* font;
+    void Write(std::string str, SDL_Rect* rect);
     Snake* snake;
     Fruit* fruit;
     friend class Fruit;
