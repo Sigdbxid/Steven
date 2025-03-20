@@ -1,7 +1,7 @@
 # ninja log v6
-8	71	1742309939230719850	build.ninja	53ffb30eb3a8b2f9
-9	644	1742309574169364049	CMakeFiles/SnakeGame.dir/Fruit.cpp.o	dd7375ae970ce0bc
-738	789	1742049420744952203	SnakeGame	d6a31221e010a4cf
-10	692	1742309574169962411	CMakeFiles/SnakeGame.dir/Snake.cpp.o	b357d67c4b40a5d1
-15	753	1742307476951022114	CMakeFiles/SnakeGame.dir/Game.cpp.o	b7c6a5850fa7a562
-10	611	1742309574170381443	CMakeFiles/SnakeGame.dir/main.cpp.o	d5da52675db2307d
+3	704	1742492209157030559	CMakeFiles/SnakeGame.dir/main.cpp.o	d5da52675db2307d
+4	664	1742492222753634928	CMakeFiles/SnakeGame.dir/Game.cpp.o	80fba93a49136a43
+2	808	1742492209156918724	CMakeFiles/SnakeGame.dir/Snake.cpp.o	b357d67c4b40a5d1
+665	719	1742492223414149263	SnakeGame	e03aa6bfdcc79a69
+2	754	1742492209156562761	CMakeFiles/SnakeGame.dir/Fruit.cpp.o	dd7375ae970ce0bc
+2	66	1742492258250644284	build.ninja	53ffb30eb3a8b2f9

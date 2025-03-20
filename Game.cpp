@@ -2,7 +2,6 @@
 // Created by Steven NIUBI on 2024/11/1.
 //
 #include <iostream>
-#include <SDL_ttf.h>
 #include "Game.h"
 #include "Snake.h"
 #include "Fruit.h"
@@ -24,7 +23,6 @@ Game::Game() : score(0), direction(RIGHT), snake(new Snake()), fruit(new Fruit(-
     snake->tailLength = 1;
     snake->snake_color = {0, 255, 0, 255};
     fruit->getFruit_Position(snake->HeadSnake_x,snake->HeadSnake_y, renderer);
-    TTF_Init();
 }
 Game::~Game()
 {

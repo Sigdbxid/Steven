@@ -40,7 +40,6 @@ public:
     void resume(); //主体
     friend class Fruit;
     //TTF_Font* font;
-    void Write(std::string str, SDL_Rect* rect);
     Snake* snake;
     Fruit* fruit;
     friend class Fruit;
